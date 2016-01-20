@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* pos_require_customer
+#	* pos_customer_mandatory
 #
 msgid ""
 msgstr ""
@@ -15,48 +15,48 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#. module: pos_require_customer
+#. module: pos_customer_mandatory
 #. openerp-web
-#: code:addons/pos_require_customer/static/src/js/pos_require_customer.js:16
+#: code:addons/pos_customer_mandatory/static/src/js/pos_customer_mandatory.js:16
 #, python-format
 msgid "An anonymous order cannot be confirmed"
 msgstr ""
 
-#. module: pos_require_customer
-#: view:pos.config:pos_require_customer.view_pos_config_form
+#. module: pos_customer_mandatory
+#: view:pos.config:pos_customer_mandatory.view_pos_config_form
 msgid "Customer"
 msgstr ""
 
-#. module: pos_require_customer
-#: code:addons/pos_require_customer/pos.py:45
+#. module: pos_customer_mandatory
+#: code:addons/pos_customer_mandatory/pos.py:45
 #, python-format
 msgid "Customer is required for this order and is missing"
 msgstr ""
 
-#. module: pos_require_customer
+#. module: pos_customer_mandatory
 #. openerp-web
-#: code:addons/pos_require_customer/static/src/js/pos_require_customer.js:17
+#: code:addons/pos_customer_mandatory/static/src/js/pos_customer_mandatory.js:17
 #, python-format
 msgid "Please select a client for this order. This can be done by clicking the order tab"
 msgstr ""
 
-#. module: pos_require_customer
-#: model:ir.model,name:pos_require_customer.model_pos_order
+#. module: pos_customer_mandatory
+#: model:ir.model,name:pos_customer_mandatory.model_pos_order
 msgid "Point of Sale"
 msgstr ""
 
-#. module: pos_require_customer
+#. module: pos_customer_mandatory
 #: field:pos.config,require_customer:0
 msgid "Require customer"
 msgstr ""
 
-#. module: pos_require_customer
+#. module: pos_customer_mandatory
 #: help:pos.config,require_customer:0
 msgid "Require customer for orders in this point of sale"
 msgstr ""
 
-#. module: pos_require_customer
-#: view:pos.order:pos_require_customer.view_pos_pos_form_inherit
+#. module: pos_customer_mandatory
+#: view:pos.order:pos_customer_mandatory.view_pos_pos_form_inherit
 msgid "{'readonly': [('state','=','invoiced')], 'required': [('require_customer','=',True)]}"
 msgstr ""
 

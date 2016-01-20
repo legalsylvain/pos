@@ -25,8 +25,8 @@ class PosConfig(models.Model):
 
     require_customer = fields.Selection(
         selection=_REQUIRE_CUSTOMER_KEYS,
-        string='Require customer',
+        string='Require Customer',
         help="Require customer for orders in this point of sale:\n"
-        "* 'no': customer is optional;"
-        "* 'payment': customer is required before paying;"
-        "* 'order': customer is required before starting the order;")
+        "* 'Optional' (customer is optional);"
+        "* 'Required before paying';"
+        "* 'Required before starting the order';")

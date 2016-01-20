@@ -9,7 +9,7 @@
 */
 
 
-odoo.define('pos_require_customer.pos_require_customer', function (require) {
+odoo.define('pos_customer_mandatory.pos_customer_mandatory', function (require) {
     "use strict";
 
     var screens = require('point_of_sale.screens');
