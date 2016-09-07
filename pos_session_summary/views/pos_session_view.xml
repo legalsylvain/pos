@@ -26,12 +26,34 @@
                 <field name="order_qty" />
                 <field name="total_amount" />
             </field>
+            <field name="total_entry_encoding" position="replace">
+                <field name="total_entry_encoding_sales" />
+                <field name="total_entry_encoding_cash" />
+            </field>
         </field>
     </record>
 
     <template id="report_sessionsummary_louve" inherit_id="point_of_sale.report_sessionsummary">
         <xpath expr="//table[1]" position="after">
             <p style="page-break-after:always;"/>
+        </xpath>
+        <xpath expr="//table[@class='table table-condensed mb32']/thead/tr//th[4]" position="replace">
+            <th class="text-right">
+                <strong>Sale Transactions Subtotal</strong>
+            </th>
+            <th class="text-right">
+                <strong>Cash Moves</strong>
+            </th>
+        </xpath>
+        <xpath expr="//table[@class='table table-condensed mb32']/tbody/tr//td[4]" position="replace">
+            <td class="text-right">
+                <span t-field="statement.total_entry_encoding_sales"
+                    t-field-options='{"widget": "monetary", "display_currency": "statement.currency_id"}'/>
+            </td>
+            <td class="text-right">
+                <span t-field="statement.total_entry_encoding_cash"
+                    t-field-options='{"widget": "monetary", "display_currency": "statement.currency_id"}'/>
+            </td>
         </xpath>
     </template>
 
