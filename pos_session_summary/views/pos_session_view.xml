@@ -29,5 +29,10 @@
         </field>
     </record>
 
-</odoo>
+    <template id="report_sessionsummary_louve" inherit_id="point_of_sale.report_sessionsummary">
+        <xpath expr="//table[1]" position="after">
+            <p style="page-break-after:always;"/>
+        </xpath>
+    </template>
 
+</odoo>
