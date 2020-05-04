@@ -38,8 +38,11 @@ odoo.define('pos_price_to_weight.models', function (require) {
             }
             var quantity = 0;
             var price = parseFloat(parsed_code.value) || 0;
-            if (price !== 0 && product.pos_price_to_weight_price !== 0){
-                quantity = price / product.pos_price_to_weight_price;
+
+            var product_price = product[this.config.pos_price_to_weight_price_field_name];
+
+            if (price !== 0 && product_price !== 0){
+                quantity = price / product_price;
             }
             selectedOrder.add_product(product, {quantity:  quantity, merge: false});
             return true;

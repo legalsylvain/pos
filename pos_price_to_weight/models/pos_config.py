@@ -11,4 +11,12 @@ class PosConfig(models.Model):
         string="Pos Price To Weight Price Field",
         comodel_name="ir.model.fields",
         domain=[("model", "=", "product.product"), ("ttype", "=", "float")],
+        required=True,
+        default=lambda x: x._default_pos_price_to_weight_price_field_id(),
     )
+
+    pos_price_to_weight_price_field_name = fields.Char(
+        related="pos_price_to_weight_price_field_id.name")
+
+    def _default_pos_price_to_weight_price_field_id(self):
+        return self.env.ref("product.field_product_product__list_price")
