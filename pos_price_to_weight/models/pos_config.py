@@ -8,7 +8,7 @@ class PosConfig(models.Model):
     _inherit = 'pos.config'
 
     pos_price_to_weight_price_field_id = fields.Many2one(
-        string="Pos Price To Weight Price Field",
+        string="Price To Weight Field",
         comodel_name="ir.model.fields",
         domain=[("model", "=", "product.product"), ("ttype", "=", "float")],
         required=True,
