@@ -14,17 +14,6 @@ odoo.define('pos_price_to_weight.models', function (require) {
 
     models.PosModel = models.PosModel.extend({
 
-        initialize: function (session, attributes) {
-
-            var product_model = _.find(this.models, function(model){
-                return model.model === 'product.product';
-            });
-            product_model.fields.push('pos_price_to_weight_price');
-
-            // Inheritance
-            return _super_PosModel.initialize.call(this, session, attributes);
-        },
-
         scan_product: function(parsed_code) {
             if (! (parsed_code.type === 'price_to_weight')){
                 // Normal behaviour
