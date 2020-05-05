@@ -88,4 +88,4 @@ class StockPicking(models.Model):
         if self.env.context.get('origin_picking_id'):
             self.update_from_origin_picking(
                 self.browse(self.env.context['origin_picking_id']))
-        return super(StockPicking, self).action_confirm()
+        return super().action_confirm()

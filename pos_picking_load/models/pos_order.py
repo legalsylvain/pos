@@ -34,7 +34,7 @@ class PosOrder(models.Model):
     @api.model
     def create_from_ui(self, orders):
         """Cancel the original picking, when the pos order is done"""
-        res = super(PosOrder, self).create_from_ui(orders)
+        res = super().create_from_ui(orders)
         orders_with_original_picking = self.search([
             ('id', 'in', res), ('origin_picking_id', '!=', False),
             ('state', '!=', 'draft')])
@@ -45,7 +45,7 @@ class PosOrder(models.Model):
 
     @api.model
     def _order_fields(self, ui_order):
-        res = super(PosOrder, self)._order_fields(ui_order)
+        res = super()._order_fields(ui_order)
         if 'origin_picking_id' in ui_order:
             res['origin_picking_id'] = ui_order['origin_picking_id']
         return res
