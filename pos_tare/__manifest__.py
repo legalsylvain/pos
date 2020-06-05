@@ -8,7 +8,7 @@
     "author": "GRAP, Le Nid, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/pos",
     "license": "AGPL-3",
-    "maintainers": ["fkawala"],
+    "maintainers": ["fkawala", "legalsylvain"],
     "depends": ["point_of_sale"],
     "data": [
         "views/templates.xml",
