@@ -71,6 +71,10 @@ odoo.define('pos_tare.models', function (require) {
         // /////////////////////////////
         // Custom Section
         // /////////////////////////////
+        set_gross_weight: function (quantity) {
+            var net_weight = quantity - this.get_tare();
+            OrderLineSuper.set_quantity.call(this, net_weight);
+        },
 
         set_tare: function (quantity, update_net_weight) {
             this.order.assert_editable();

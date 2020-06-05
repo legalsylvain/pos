@@ -52,6 +52,10 @@
     height: 216px;
 }
 
-.pos .numpad button.input-button.numpad-backspace {
+.pos .product-screen .numpad button.input-button.numpad-backspace {
     width: 216px;
+}
+
+.pos .pos-right-align{
+    vertical-align: top;
 }

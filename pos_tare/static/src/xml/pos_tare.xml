@@ -32,9 +32,9 @@
             <t t-if="line.get_tare() !== 0">
                 <li class="info">
                     <i>
-                      (Gross :
+                      (Gross Weight:
                       <em><t t-esc="line.get_gross_weight_str_with_unit()"/></em>
-                      - Tare :
+                      - Tare:
                       <em><t t-esc="line.get_tare_str_with_unit()"/></em>)
                     </i>
                 </li>

@@ -139,14 +139,11 @@ odoo.define('pos_tare.screens', function (require) {
             if (order.get_selected_orderline()) {
                 var mode = this.numpad_state.get('mode');
                 if (mode === 'quantity') {
-                    order.get_selected_orderline().set_quantity(val);
-                } else if (mode === 'discount') {
-                    order.get_selected_orderline().set_discount(val);
-                } else if (mode === 'price') {
-                    var selected_orderline = order.get_selected_orderline();
-                    selected_orderline.price_manually_set = true;
-                    selected_orderline.set_unit_price(val);
+                    // We now consider that the numpad is used to set
+                    // a gross weight
+                    order.get_selected_orderline().set_gross_weight(val);
                 } else if (mode === 'tare') {
+                    // TODO, only disable this button
                     if (this.pos.config.iface_tare_method === 'barcode') {
                         this.gui.show_popup('error',
                             {'title': _t('Incorrect Tare Value'),
@@ -155,8 +152,12 @@ odoo.define('pos_tare.screens', function (require) {
                                 ' you have to change the tare input method' +
                                 ' in the POS configuration.')});
                     } else {
+                        // Handle the new button
                         order.get_selected_orderline().set_tare(val, true);
                     }
+                } else {
+                    // call super
+                    this._super(val);
                 }
             }
         },
