@@ -8,21 +8,69 @@ odoo.define('pos_tare.screens', function (require) {
     var _t = core._t;
     var round_pr = utils.round_precision;
 
+/*--------------------------------------*\
+|           OrderWidget                  |
+\*======================================*/
+
+    screens.OrderWidget.include({
+        set_value: function (val) {
+            var order = this.pos.get_order();
+            if (order.get_selected_orderline()) {
+                var mode = this.numpad_state.get('mode');
+                if (mode === 'quantity' && val !== "remove") {
+                    // We now consider that the numpad is used to set
+                    // a gross weight
+                    order.get_selected_orderline().set_gross_weight(val);
+                } else if (mode === 'tare') {
+                    // Handle the new button
+                    order.get_selected_orderline().set_tare(val, true);
+                } else {
+                    return this._super(val);
+                }
+            }
+        },
+    });
+
+/*--------------------------------------*\
+|           NumpadWidget                 |
+\*======================================*/
+    screens.NumpadWidget.include({
+
+        clickChangeMode: function (event) {
+            var newMode = event.currentTarget.attributes['data-mode'].nodeValue;
+            var current_line = this.pos.get_order().get_selected_orderline();
+
+            if (this.pos.config.iface_tare_method === 'barcode'){
+                this.gui.show_popup('error', {
+                    'title': _t('Disabled function'),
+                    'body':  _t('The manual Tare function is disabled. Please ask to your Odoo administrator to enable the feature.'),
+                });
+            } else if (current_line && !current_line.product.to_weight && newMode === 'tare'){
+                this.gui.show_popup('error', {
+                    'title': _t('Tare function unavailable'),
+                    'body':  _t('You can not use Tare button for non weightable products.'),
+                });
+            } else{
+                return this._super(event);
+            }
+
+        },
+
+    });
+
+/*--------------------------------------*\
+|           ScreenWidget                 |
+\*======================================*/
+
     // This configures read action for tare barcode. A tare barcode contains a
     // fake product ID and the weight to be subtracted from the product in the
     // latest order line.
     screens.ScreenWidget.include({
         barcode_tare_action: function (code) {
-            try {
-                var order = this.pos.get_order();
-                var selected_order_line = order.get_selected_orderline();
-                var tare_weight = code.value;
-                selected_order_line.set_tare(tare_weight, true);
-            } catch (error) {
-                var title = _t("We can not apply this tare barcode.");
-                var popup = {title: title, body: error.message};
-                this.gui.show_popup('error', popup);
-            }
+            var order = this.pos.get_order();
+            var selected_order_line = order.get_selected_orderline();
+            var tare_weight = code.value;
+            selected_order_line.set_tare(tare_weight, true);
         },
         // Setup the callback action for the "weight" barcodes.
         show: function () {
@@ -35,12 +83,15 @@ odoo.define('pos_tare.screens', function (require) {
         },
     });
 
+/*--------------------------------------*\
+|           ScaleScreenWidget            |
+\*======================================*/
+
     screens.ScaleScreenWidget.include({
 
         // /////////////////////////////
         // Overload Section
         // /////////////////////////////
-
         show: function () {
             this.tare = 0.0;
             this.gross_weight = 0.0;
@@ -133,33 +184,4 @@ odoo.define('pos_tare.screens', function (require) {
 
     });
 
-    screens.OrderWidget.include({
-        set_value: function (val) {
-            var order = this.pos.get_order();
-            if (order.get_selected_orderline()) {
-                var mode = this.numpad_state.get('mode');
-                if (mode === 'quantity') {
-                    // We now consider that the numpad is used to set
-                    // a gross weight
-                    order.get_selected_orderline().set_gross_weight(val);
-                } else if (mode === 'tare') {
-                    // TODO, only disable this button
-                    if (this.pos.config.iface_tare_method === 'barcode') {
-                        this.gui.show_popup('error',
-                            {'title': _t('Incorrect Tare Value'),
-                                'body': _t('You can not set the tare.' +
-                                ' To be able to set the tare manually' +
-                                ' you have to change the tare input method' +
-                                ' in the POS configuration.')});
-                    } else {
-                        // Handle the new button
-                        order.get_selected_orderline().set_tare(val, true);
-                    }
-                } else {
-                    // call super
-                    this._super(val);
-                }
-            }
-        },
-    });
 });

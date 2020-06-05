@@ -7,32 +7,6 @@ odoo.define('pos_tare.models', function (require) {
 
     var _t = core._t;
 
-    // class ValidationError extends Error {
-    //     constructor(message, gui) {
-    //         super(message); // (1)
-    //         this.name = "ValidationError"; // (2)
-    //         this.gui = gui;
-    //     }
-    // }
-
-    // var NumpadStateSuper = models.NumpadState.prototype;
-    // var NumpadState = models.NumpadState.extend({
-    //     appendNewChar: function (newChar) {
-    //         try {
-    //             NumpadStateSuper.appendNewChar.call(this, newChar);
-    //         } catch (error) {
-    //             if (error instanceof ValidationError) {
-    //                 var title = _t("Error while applying the numpad action");
-    //                 var popup = {title: title, body: error.message};
-    //                 error.gui.show_popup('error', popup);
-    //                 NumpadStateSuper.deleteLastChar.call(this);
-    //             } else {
-    //               throw error;
-    //             }
-    //         }
-    //     },
-    // });
-
     var OrderLineSuper = models.Orderline.prototype;
     var OrderLine = models.Orderline.extend({
 
