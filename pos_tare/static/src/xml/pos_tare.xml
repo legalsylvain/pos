@@ -42,6 +42,38 @@
         </t>
     </t>
 
+    <t t-name="NumpadWidget">
+        <div class="numpad">
+            <button class="input-button number-char">1</button>
+            <button class="input-button number-char">2</button>
+            <button class="input-button number-char">3</button>
+            <button class="mode-button" data-mode='quantity'>Qty</button>
+
+            <br />
+            <button class="input-button number-char">4</button>
+            <button class="input-button number-char">5</button>
+            <button class="input-button number-char">6</button>
+            <button class="mode-button" data-mode='tare'>Tare</button>
+
+            <br />
+            <button class="input-button number-char">7</button>
+            <button class="input-button number-char">8</button>
+            <button class="input-button number-char">9</button>
+            <button class="mode-button" data-mode='discount'>Disc</button>
+
+            <br />
+            <button class="input-button numpad-minus" >+/-</button>
+            <button class="input-button number-char">0</button>
+            <button class="input-button number-char">.</button>
+            <button class="mode-button" data-mode='price'>Price</button>
+
+            <button class="input-button numpad-backspace">
+                <img style="pointer-events: none;" src="/point_of_sale/static/src/img/backspace.png" width="24" height="21" alt="Backspace"/>
+            </button>
+        </div>
+    </t>
+
+<!-- Receipt in Non Proxy Mode -->
     <t t-name="PosTicket" t-extend="PosTicket">
         <t t-jquery="tr[t-foreach='orderlines'] > td:nth-child(1)" t-operation="append">
             <t t-if="orderline.get_tare() > 0">
@@ -55,6 +87,8 @@
         </t>
     </t>
 
+<!-- Receipt in Proxy Mode -->
+<!--
     <t t-name="XmlReceipt" t-extend="XmlReceipt">
         <t t-jquery=".orderlines" t-operation="inner">
               <t t-foreach='receipt.orderlines' t-as='line'>
@@ -96,36 +130,6 @@
                   </t>
               </t>
         </t>
-    </t>
+    </t> -->
 
-    <t t-name="NumpadWidget">
-        <div class="numpad">
-            <button class="input-button number-char">1</button>
-            <button class="input-button number-char">2</button>
-            <button class="input-button number-char">3</button>
-            <button class="mode-button" data-mode='quantity'>Qty</button>
-
-            <br />
-            <button class="input-button number-char">4</button>
-            <button class="input-button number-char">5</button>
-            <button class="input-button number-char">6</button>
-            <button class="mode-button" data-mode='tare'>Tare</button>
-
-            <br />
-            <button class="input-button number-char">7</button>
-            <button class="input-button number-char">8</button>
-            <button class="input-button number-char">9</button>
-            <button class="mode-button" data-mode='discount'>Disc</button>
-
-            <br />
-            <button class="input-button numpad-minus" >+/-</button>
-            <button class="input-button number-char">0</button>
-            <button class="input-button number-char">.</button>
-            <button class="mode-button" data-mode='price'>Price</button>
-
-            <button class="input-button numpad-backspace">
-                <img style="pointer-events: none;" src="/point_of_sale/static/src/img/backspace.png" width="24" height="21" alt="Backspace"/>
-            </button>
-        </div>
-    </t>
 </templates>
