@@ -147,8 +147,8 @@ odoo.define('pos_tare.screens', function (require) {
                     title: _t('Quantity lower or equal to zero'),
                     body:  _.str.sprintf(
                         _t("The quantity for \"%s\" is lower or equal to" +
-                        " zero. Call for help unless your perfectly sure " +
-                        " about what you are doing."), wrong_product),
+                        " zero. Call for help unless you're perfectly" +
+                        " sure you are doing right."), wrong_product),
                     confirm: function() {
                         _super_validate_order();
                     },
