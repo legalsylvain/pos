@@ -88,6 +88,12 @@
     </t>
 
 <!-- Receipt in Proxy Mode -->
+    <t t-name="XmlReceipt" t-extend="XmlReceipt">
+        <t t-jquery="t[t-set='simple']" t-operation="after">
+          <t t-set='simple' t-value="true"/>
+        </t>
+    </t>
+
 <!--
     <t t-name="XmlReceipt" t-extend="XmlReceipt">
         <t t-jquery=".orderlines" t-operation="inner">
