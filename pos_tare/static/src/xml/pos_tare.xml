@@ -31,7 +31,7 @@
         <t t-jquery=".info-list:last-child" t-operation="append">
             <t t-if="line.get_tare() !== 0">
                 <li class="info">
-                    <i class="fa fa-beer"/>
+                    <i class="fas fa-prescription-bottle"></i>
                     Tare :
                     <t t-esc="line.get_tare_str_with_unit()"/>
                 </li>
@@ -71,13 +71,15 @@
                       </t>
                       <line indent='1'>
                           <left>
-                              <value t-att-value-decimals='pos.dp["Product Unit of Measure"]' value-autoint='on'>
                                 <t t-if="line.tare_quantity !== 0">
-                                  <t t-esc="line.gross_quantity" /> -
-                                  <t t-esc="line.tare_quantity"/> =
+                                  <value t-att-value-decimals='pos.dp["Product Unit of Measure"]' value-autoint='on'>
+                                    <t t-esc="line.gross_quantity" />
+                                  </value> -
+                                  <value t-att-value-decimals='pos.dp["Product Unit of Measure"]' value-autoint='on'>
+                                    <t t-esc="line.tare_quantity"/>
+                                  </value> =
                                 </t>
                                   <t t-esc='line.quantity' />
-                              </value>
                               <t t-if='line.unit_name !== "Unit(s)"'>
                                   <t t-esc='line.unit_name' />
                               </t>
