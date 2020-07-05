@@ -31,9 +31,12 @@
         <t t-jquery=".info-list:last-child" t-operation="append">
             <t t-if="line.get_tare() !== 0">
                 <li class="info">
-                    <i class="fas fa-prescription-bottle"></i>
-                    Tare :
-                    <t t-esc="line.get_tare_str_with_unit()"/>
+                    <i>
+                      (Gross Weight:
+                      <em><t t-esc="line.get_gross_weight_str_with_unit()"/></em>
+                      - Tare:
+                      <em><t t-esc="line.get_tare_str_with_unit()"/></em>)
+                    </i>
                 </li>
             </t>
         </t>
