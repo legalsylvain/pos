@@ -56,47 +56,21 @@
     </t>
 
     <t t-name="XmlReceipt" t-extend="XmlReceipt">
-        <t t-jquery=".orderlines" t-operation="inner">
-              <t t-foreach='receipt.orderlines' t-as='line'>
-                  <t t-set='simple' t-value='line.discount === 0 and line.unit_name === "Unit(s)" and line.quantity === 1' />
-                  <t t-if='simple'>
-                      <line>
-                          <left><t t-esc='line.product_name_wrapped[0]' /></left>
-                          <right><value t-att-value-decimals='pos.currency.decimals'><t t-esc='line.price_display' /></value></right>
-                      </line>
-                      <t t-call="XmlReceiptWrappedProductNameLines"/>
-                  </t>
-                  <t t-if='!simple'>
-                      <line><left><t t-esc='line.product_name_wrapped[0]' /></left></line>
-                      <t t-call="XmlReceiptWrappedProductNameLines"/>
-                      <t t-if='line.discount !== 0'>
-                          <line indent='1'><left>Discount: <t t-esc='line.discount' />%</left></line>
-                      </t>
-                      <line indent='1'>
-                          <left>
-                                <t t-if="line.tare_quantity !== 0">
-                                  <value t-att-value-decimals='pos.dp["Product Unit of Measure"]' value-autoint='on'>
-                                    <t t-esc="line.gross_quantity" />
-                                  </value> -
-                                  <value t-att-value-decimals='pos.dp["Product Unit of Measure"]' value-autoint='on'>
-                                    <t t-esc="line.tare_quantity"/>
-                                  </value> =
-                                </t>
-                                  <t t-esc='line.quantity' />
-                              <t t-if='line.unit_name !== "Unit(s)"'>
-                                  <t t-esc='line.unit_name' />
-                              </t>
-                              x
-                              <value t-att-value-decimals='pos.dp["Product Price"]'>
-                                  <t t-esc='line.price' />
-                              </value>
-                          </left>
-                          <right>
-                              <value t-att-value-decimals='pos.currency.decimals'><t t-esc='line.price_display' /></value>
-                          </right>
-                      </line>
-                  </t>
-              </t>
+        <t t-jquery="t[t-if='!simple']" t-operation="append">
+            <t t-if="line.tare_quantity !== 0">
+                <line indent='1'>
+                    <left>
+                        (
+                        <value t-att-value-decimals='pos.dp["Product Unit of Measure"]' value-autoint='on'>
+                          <t t-esc="line.gross_quantity" />
+                        </value> -
+                        <value t-att-value-decimals='pos.dp["Product Unit of Measure"]' value-autoint='on'>
+                          <t t-esc="line.tare_quantity"/>
+                        </value>
+                        )
+                    </left>
+                </line>
+            </t>
         </t>
     </t>
 
